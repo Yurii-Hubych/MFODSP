@@ -94,99 +94,6 @@ with open("data.txt", "w", encoding='utf-8') as file:
 
 
 
-
-
-x = np.linspace(-3*np.pi, -np.pi, 1000)
-max_err = 0
-plot_arr = []
-error_arr = []
-# Define the number of terms to use in the Fourier series
-for n_terms in range(20):
-    # Calculate the Fourier series coefficients
-    a0 = np.sum(f(x)) / len(x)
-    an = np.zeros(n_terms)
-    bn = np.zeros(n_terms)
-
-    for i in range(1, n_terms+1):
-        an[i-1] = (2/len(x)) * np.sum(f(x) * np.cos(i * np.pi * x / max(x)))
-        bn[i-1] = (2/len(x)) * np.sum(f(x) * np.sin(i * np.pi * x / max(x)))
-
-
-
-    # Define the Fourier series approximation
-
-    fourier_series = np.zeros(len(x))
-    # Calculate the relative error at each point
-    error = np.abs((f(x) - (fourier_series + a0)) / f(x))
-    avg_error = np.mean(np.abs((f(x) - (fourier_series + a0)) / np.max(np.abs(f(x)))))
-
-    fourier_series = np.zeros(len(x))
-    for i in range(n_terms):
-        fourier_series += an[i] * np.cos((i+1) * np.pi * x / max(x)) + bn[i] * np.sin((i+1) * np.pi * x / max(x))
-    plot_arr.append(fourier_series)
-    plt.figure(figsize=(10, 8))
-
-# Print Fourier coefficients
-print((a0 + sum(fourier_series)))
-print("2. a0 = {:.4f}".format(a0))
-for i in range(n_terms):
-    print("a{} = {:.4f}, b{} = {:.4f}".format(i+1, an[i], i+1, bn[i]))
-# Print the average relative error
-print("\n5. Середня відносна похибка отриманого наближення = {:.4f}".format(avg_error))
-
-plt.plot(x, f(x), label='Початкова функція')
-for fourier_series in plot_arr:
-    plt.plot(x, fourier_series + a0)
-plt.legend()
-plt.show()
-
-x = np.linspace(np.pi, 3*np.pi, 1000)
-max_err = 0
-plot_arr = []
-error_arr = []
-# Define the number of terms to use in the Fourier series
-for n_terms in range(20):
-    # Calculate the Fourier series coefficients
-    a0 = np.sum(f(x)) / len(x)
-    an = np.zeros(n_terms)
-    bn = np.zeros(n_terms)
-
-    for i in range(1, n_terms+1):
-        an[i-1] = (2/len(x)) * np.sum(f(x) * np.cos(i * np.pi * x / max(x)))
-        bn[i-1] = (2/len(x)) * np.sum(f(x) * np.sin(i * np.pi * x / max(x)))
-
-
-
-    # Define the Fourier series approximation
-
-    fourier_series = np.zeros(len(x))
-    # Calculate the relative error at each point
-    error = np.abs((f(x) - (fourier_series + a0)) / f(x))
-    avg_error = np.mean(np.abs((f(x) - (fourier_series + a0)) / np.max(np.abs(f(x)))))
-
-    fourier_series = np.zeros(len(x))
-    for i in range(n_terms):
-        fourier_series += an[i] * np.cos((i+1) * np.pi * x / max(x)) + bn[i] * np.sin((i+1) * np.pi * x / max(x))
-    plot_arr.append(fourier_series)
-    plt.figure(figsize=(10, 8))
-
-# Print Fourier coefficients
-print((a0 + sum(fourier_series)))
-print("2. a0 = {:.4f}".format(a0))
-for i in range(n_terms):
-    print("a{} = {:.4f}, b{} = {:.4f}".format(i+1, an[i], i+1, bn[i]))
-# Print the average relative error
-print("\n5. Середня відносна похибка отриманого наближення = {:.4f}".format(avg_error))
-
-plt.plot(x, f(x), label='Початкова функція')
-for fourier_series in plot_arr:
-    plt.plot(x, fourier_series + a0)
-plt.legend()
-plt.show()
-
-
-
-
 x = np.linspace(-3*np.pi, 3*np.pi, 1000)
 x = x[(x < np.pi) | (x > np.pi)]
 max_err = 0
@@ -217,14 +124,6 @@ for n_terms in range(20):
         fourier_series += an[i] * np.cos((i+1) * np.pi * x / max(x)) + bn[i] * np.sin((i+1) * np.pi * x / max(x))
     plot_arr.append(fourier_series)
     plt.figure(figsize=(10, 8))
-
-# Print Fourier coefficients
-print((a0 + sum(fourier_series)))
-print("2. a0 = {:.4f}".format(a0))
-for i in range(n_terms):
-    print("a{} = {:.4f}, b{} = {:.4f}".format(i+1, an[i], i+1, bn[i]))
-# Print the average relative error
-print("\n5. Середня відносна похибка отриманого наближення = {:.4f}".format(avg_error))
 
 plt.plot(x, f(x), label='Початкова функція')
 for fourier_series in plot_arr:
